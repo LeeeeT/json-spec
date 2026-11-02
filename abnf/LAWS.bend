@@ -14,7 +14,7 @@
 import Base
 
 law Rule:
-  Type
+  Data
 
 # A book says what references mean: a grammar, and how deep they may unfold.
 # limit(d, g) lets each path of a derivation pass through at most d references
@@ -36,7 +36,7 @@ law Rule:
 # rep.any.elim asks for a number of repetitions instead.
 
 law Book:
-  Type
+  Data
 
 law check:
   for book: Book
@@ -105,6 +105,18 @@ law ref.succ:
   for name: String
   for s: String
   {check(limit(1n+d, g), ref(name), s) == check(limit(d, g), lookup(g, name), s) : Bool}
+
+law matches:
+  for g: List<(String & Rule)>
+  for name: String
+  for s: String
+  Bool
+
+law matches.ok:
+  for g: List<(String & Rule)>
+  for name: String
+  for s: String
+  {matches(g, name, s) == check(full(g), ref(name), s) : Bool}
 
 law empty:
   Rule

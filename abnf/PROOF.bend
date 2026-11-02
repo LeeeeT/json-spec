@@ -4446,6 +4446,12 @@ def Laws.ref.zero(g, name, s):
 def Laws.ref.succ(d, g, name, s):
   ref_succ_b(d, conv(g), String.to_lower(name), s)
 
+def Laws.matches(g, name, s):
+  Laws.check(Laws.full(g), Laws.ref(name), s)
+
+def Laws.matches.ok(g, name, s):
+  {==}
+
 def Laws.empty.nil(book):
   o2c(book, REps{}, SNil{}, True{}, {==})
 
